@@ -1,6 +1,8 @@
 package com.example.swipeview;
 
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -38,7 +40,40 @@ public class MainActivity extends AppCompatActivity {
         myAdapter.add(new Three(), "Three");
         viewPager.setAdapter(myAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 0:
+                        tabLayout.setBackgroundColor(Color.CYAN);
+                        toolbar.setBackgroundColor(Color.CYAN);
+                        break;
+                    case 1:
+                        tabLayout.setBackgroundColor(Color.BLACK);
+                        toolbar.setBackgroundColor(Color.BLACK);
+                        tabLayout.setTabTextColors(Color.WHITE, Color.YELLOW);
+                        toolbar.setTitleTextColor(Color.WHITE);
+                        break;
+                    case 2:
+                        tabLayout.setBackgroundColor(Color.RED);
+                        toolbar.setBackgroundColor(Color.RED);
+                        break;
 
+
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
@@ -56,6 +91,7 @@ class myAdap extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+
         return fragList.get(i);
     }
 
