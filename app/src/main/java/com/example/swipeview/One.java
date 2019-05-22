@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,9 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class One extends Fragment {
-
+    String data[] = new String[]{"manas", "matru", "komal", "pikachu", "monkey", "farah", "mohit", "radhya"};
+    int images[] = new int[]{R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,R.drawable.ic_android_black_24dp,};
+    RecyclerView recyclerView;
 
     public One() {
         // Required empty public constructor
@@ -25,15 +29,18 @@ public class One extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-       Log.d("taggg", "onSaveInstanceState()");
+        Log.d("taggg", "onSaveInstanceState()");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.d("taggg", "Oncraeteview()");
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        View v = inflater.inflate(R.layout.fragment_one, container, false);
+        recyclerView = v.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new MyAdapter(images, data));
+        recyclerView.setHasFixedSize(true);
+        return v;
 
     }
 
